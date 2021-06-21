@@ -12,7 +12,7 @@ class Record:
 
 
 def add_record(amount, date, comment):
-    record = Record(amount, date, comment)
+    record = [Record(amount, date, comment)]
     records.append(record)
 
 
