@@ -8,7 +8,7 @@ class Calculator:
         self.date_today = dt.date.today()
         self.date_week_ago = self.date_today + dt.timedelta(days=-7)
 
-    def add_record(self, amount, date=str(dt.date.today()), comment=''):
+    def add_record(self, amount, comment, date=str(dt.date.today())):
         record = Record(amount, date, comment)
         self.records.append(record)
 
@@ -32,20 +32,21 @@ class Calculator:
 
 
 class Record:
-    def __init__(self, amount, date, comment):
+    def __init__(self, amount, comment, date=str(dt.date.today())):
         self.amount = amount
         self.date = date
         self.comment = comment
 
 
 class CashCalculator(Calculator):
+    USD_RATE = (1 / 73)
+    EUR_RATE = (1 / 84)
+
     def get_today_cash_remained(self, currency):
-        USD_RATE = (1 / 73)
-        EUR_RATE = (1 / 84)
         today_currency = {
             'rub': ['руб', 1],
-            'usd': ['USD', USD_RATE],
-            'eur': ['Euro', EUR_RATE]
+            'usd': ['USD', CashCalculator.USD_RATE],
+            'eur': ['Euro', CashCalculator.EUR_RATE]
         }
         present_currencies = ', '.join(today_currency.keys())
         currency_present_list = today_currency[currency]
