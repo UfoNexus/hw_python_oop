@@ -8,7 +8,7 @@ class Calculator:
         self.date_today = dt.date.today()
         self.date_week_ago = self.date_today + dt.timedelta(days=-7)
 
-    def add_record(self, amount, date, comment):
+    def add_record(self, amount, date=str(dt.date.today()), comment=''):
         record = Record(amount, date, comment)
         self.records.append(record)
 
@@ -40,23 +40,21 @@ class Record:
 
 class CashCalculator(Calculator):
     def get_today_cash_remained(self, currency):
+        USD_RATE = (1 / 73)
+        EUR_RATE = (1 / 84)
         today_currency = {
-            'rub': 1,
-            'usd': 0.014,
-            'eur': 0.011
-        }
-        currency_normal_writing = {
-            'rub': 'руб',
-            'usd': 'USD',
-            'eur': 'Euro'
+            'rub': ['руб', 1],
+            'usd': ['USD', USD_RATE],
+            'eur': ['Euro', EUR_RATE]
         }
         present_currencies = ', '.join(today_currency.keys())
+        currency_present_list = today_currency[currency]
         if self.get_remained() > 0:
             if currency in today_currency.keys():
-                cash_remained = self.get_remained() * today_currency[currency]
+                cash_remained = self.get_remained() * currency_present_list[1]
                 cash_remained = round(cash_remained, 2)
                 return (f'На сегодня осталось {cash_remained} '
-                        f'{currency_normal_writing[currency]}')
+                        f'{currency_present_list[0]}')
             else:
                 return (f'Простите, мне неизвестна валюта {currency}. '
                         f'Предлагаю посчитать в валютах {present_currencies}.')
@@ -64,10 +62,10 @@ class CashCalculator(Calculator):
             return 'Денег нет, держись'
         else:
             if currency in today_currency.keys():
-                cash_remained = self.get_remained() * today_currency[currency]
+                cash_remained = self.get_remained() * currency_present_list[1]
                 cash_remained = round(abs(cash_remained), 2)
                 return (f'Денег нет, держись: твой долг - {cash_remained}'
-                        f' {currency_normal_writing[currency]}')
+                        f' {currency_present_list[0]}')
             else:
                 return (f'Простите, мне неизвестна валюта {currency}. '
                         f'Предлагаю посчитать в валютах {present_currencies}.')
