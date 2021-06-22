@@ -53,8 +53,9 @@ class CashCalculator(Calculator):
         present_currencies = ', '.join(today_currency.keys())
         if self.get_remained() > 0:
             if currency in today_currency.keys():
-                return (f'На сегодня осталось '
-                        f'{self.get_remained() * today_currency[currency]} '
+                cash_remained = self.get_remained() * today_currency[currency]
+                cash_remained = round(cash_remained, 2)
+                return (f'На сегодня осталось {cash_remained} '
                         f'{currency_normal_writing[currency]}')
             else:
                 return (f'Простите, мне неизвестна валюта {currency}. '
@@ -63,8 +64,9 @@ class CashCalculator(Calculator):
             return 'Денег нет, держись'
         else:
             if currency in today_currency.keys():
-                return (f'Денег нет, держись: твой долг - '
-                        f'{abs(self.get_remained() * today_currency[currency])}'
+                cash_remained = self.get_remained() * today_currency[currency]
+                cash_remained = round(abs(cash_remained), 2)
+                return (f'Денег нет, держись: твой долг - {cash_remained}'
                         f' {currency_normal_writing[currency]}')
             else:
                 return (f'Простите, мне неизвестна валюта {currency}. '
