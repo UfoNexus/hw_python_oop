@@ -6,7 +6,7 @@ class Calculator:
         self.limit = limit
         self.records = []
         self.date_today = dt.date.today()
-        self.date_week_ago = self.date_today + dt.timedelta(days=-6)
+        self.date_week_ago = self.date_today + dt.timedelta(days=-7)
 
     def add_record(self, new_record):
         self.records.append(new_record)
@@ -25,7 +25,7 @@ class Calculator:
     def get_week_stats(self):
         amount_recorded = 0
         for i in self.records:
-            if i.date >= self.date_week_ago:
+            if i.date > self.date_week_ago and i.date <= self.date_today:
                 amount_recorded += i.amount
         return amount_recorded
 
@@ -51,9 +51,9 @@ class CashCalculator(Calculator):
             'eur': ['Euro', CashCalculator.EURO_RATE]
         }
         present_currencies = ', '.join(today_currency.keys())
-        currency_name_rate = today_currency[currency]
         if self.get_remained() > 0:
             if currency in today_currency.keys():
+                currency_name_rate = today_currency[currency]
                 cash_remained = self.get_remained() * currency_name_rate[1]
                 cash_remained = round(cash_remained, 2)
                 return (f'На сегодня осталось {cash_remained} '
@@ -65,6 +65,7 @@ class CashCalculator(Calculator):
             return 'Денег нет, держись'
         else:
             if currency in today_currency.keys():
+                currency_name_rate = today_currency[currency]
                 cash_remained = self.get_remained() * currency_name_rate[1]
                 cash_remained = round(abs(cash_remained), 2)
                 return (f'Денег нет, держись: твой долг - {cash_remained}'
