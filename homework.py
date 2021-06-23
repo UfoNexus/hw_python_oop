@@ -8,14 +8,13 @@ class Calculator:
         self.date_today = dt.date.today()
         self.date_week_ago = self.date_today + dt.timedelta(days=-7)
 
-    def add_record(self, amount, comment, date=str(dt.date.today())):
-        record = Record(amount, date, comment)
-        self.records.append(record)
+    def add_record(self, new_record):
+        self.records.append(new_record)
 
     def get_today_stats(self):
         amount_recorded = 0
         for i in self.records:
-            if i.date == str(self.date_today):
+            if i.date == self.date_today:
                 amount_recorded += i.amount
         return amount_recorded
 
@@ -26,21 +25,24 @@ class Calculator:
     def get_week_stats(self):
         amount_recorded = 0
         for i in self.records:
-            if i.date >= str(self.date_week_ago):
+            if i.date >= self.date_week_ago:
                 amount_recorded += i.amount
         return amount_recorded
 
 
 class Record:
-    def __init__(self, amount, comment, date=str(dt.date.today())):
+    def __init__(self, amount, comment, date=None):
         self.amount = amount
-        self.date = date
         self.comment = comment
+        if date is None:
+            self.date = dt.date.today()
+        else:
+            self.date = dt.datetime.strptime(date, '%d.%m.%Y')
 
 
 class CashCalculator(Calculator):
-    USD_RATE = (1 / 73)
-    EUR_RATE = (1 / 84)
+    USD_RATE = 0.14
+    EUR_RATE = 0.11
 
     def get_today_cash_remained(self, currency):
         today_currency = {
@@ -49,13 +51,13 @@ class CashCalculator(Calculator):
             'eur': ['Euro', CashCalculator.EUR_RATE]
         }
         present_currencies = ', '.join(today_currency.keys())
-        currency_present_list = today_currency[currency]
+        currency_name_rate = today_currency[currency]
         if self.get_remained() > 0:
             if currency in today_currency.keys():
-                cash_remained = self.get_remained() * currency_present_list[1]
+                cash_remained = self.get_remained() * currency_name_rate[1]
                 cash_remained = round(cash_remained, 2)
                 return (f'На сегодня осталось {cash_remained} '
-                        f'{currency_present_list[0]}')
+                        f'{currency_name_rate[0]}')
             else:
                 return (f'Простите, мне неизвестна валюта {currency}. '
                         f'Предлагаю посчитать в валютах {present_currencies}.')
@@ -63,10 +65,10 @@ class CashCalculator(Calculator):
             return 'Денег нет, держись'
         else:
             if currency in today_currency.keys():
-                cash_remained = self.get_remained() * currency_present_list[1]
+                cash_remained = self.get_remained() * currency_name_rate[1]
                 cash_remained = round(abs(cash_remained), 2)
                 return (f'Денег нет, держись: твой долг - {cash_remained}'
-                        f' {currency_present_list[0]}')
+                        f' {currency_name_rate[0]}')
             else:
                 return (f'Простите, мне неизвестна валюта {currency}. '
                         f'Предлагаю посчитать в валютах {present_currencies}.')
