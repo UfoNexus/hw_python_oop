@@ -1,4 +1,3 @@
-
 ----------------------- Проверка flake8 пройдена -----------------------
 
 ============================= test session starts ==============================
@@ -29,9 +28,9 @@ tests/test_homework.py::TestCashCalculator::test_get_today_cash_remained[-1-eur]
 tests/test_homework.py::TestCashCalculator::test_get_today_cash_remained[-1-rub] PASSED [100%]
 
 =================================== FAILURES ===================================
-/app/tests/test_homework.py:97: AssertionError: Проверьте правильность работы метода `get_week_stats()` у класса `Calculator`
+/app/tests/test_homework.py:100: AssertionError: Необходимо считать сколько денег потрачено за последние 7 дней
 /app/tests/test_homework.py:203: AssertionError: Проверьте правильность работы метода `get_today_cash_remained()` у класса `CashCalculator`
 /app/tests/test_homework.py:203: AssertionError: Проверьте правильность работы метода `get_today_cash_remained()` у класса `CashCalculator`
 /app/tests/test_homework.py:203: AssertionError: Проверьте правильность работы метода `get_today_cash_remained()` у класса `CashCalculator`
 /app/tests/test_homework.py:203: AssertionError: Проверьте правильность работы метода `get_today_cash_remained()` у класса `CashCalculator`
-========================= 5 failed, 15 passed in 0.21s =========================
+========================= 5 failed, 15 passed in 0.19s =========================
