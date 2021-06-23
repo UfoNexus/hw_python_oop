@@ -25,7 +25,7 @@ class Calculator:
     def get_week_stats(self):
         amount_recorded = 0
         for i in self.records:
-            if i.date >= self.date_week_ago and i.date <= self.date_today:
+            if i.date >= self.date_week_ago and i.date < self.date_today:
                 amount_recorded += i.amount
         return amount_recorded
 
