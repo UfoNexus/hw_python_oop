@@ -6,7 +6,7 @@ class Calculator:
         self.limit = limit
         self.records = []
         self.date_today = dt.date.today()
-        self.date_week_ago = self.date_today + dt.timedelta(days=-7)
+        self.date_week_ago = self.date_today + dt.timedelta(days=-6)
 
     def add_record(self, new_record):
         self.records.append(new_record)
@@ -41,8 +41,8 @@ class Record:
 
 
 class CashCalculator(Calculator):
-    USD_RATE = 0.14
-    EURO_RATE = 0.11
+    USD_RATE = 0.014
+    EURO_RATE = 0.012
 
     def get_today_cash_remained(self, currency):
         today_currency = {
