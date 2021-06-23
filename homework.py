@@ -50,29 +50,20 @@ class CashCalculator(Calculator):
             'usd': ['USD', CashCalculator.USD_RATE],
             'eur': ['Euro', CashCalculator.EURO_RATE]
         }
-        present_currencies = ', '.join(today_currency.keys())
         if self.get_remained() > 0:
-            if currency in today_currency.keys():
-                currency_name_rate = today_currency[currency]
-                cash_remained = self.get_remained() * currency_name_rate[1]
-                cash_remained = round(cash_remained, 2)
-                return (f'На сегодня осталось {cash_remained} '
-                        f'{currency_name_rate[0]}')
-            else:
-                return (f'Простите, мне неизвестна валюта {currency}. '
-                        f'Предлагаю посчитать в валютах {present_currencies}.')
+            currency_name_rate = today_currency[currency]
+            cash_remained = self.get_remained() * currency_name_rate[1]
+            cash_remained = round(cash_remained, 2)
+            return (f'На сегодня осталось {cash_remained} '
+                    f'{currency_name_rate[0]}')
         elif self.get_remained() == 0:
             return 'Денег нет, держись'
         else:
-            if currency in today_currency.keys():
-                currency_name_rate = today_currency[currency]
-                cash_remained = self.get_remained() * currency_name_rate[1]
-                cash_remained = round(abs(cash_remained), 2)
-                return (f'Денег нет, держись: твой долг - {cash_remained}'
-                        f' {currency_name_rate[0]}')
-            else:
-                return (f'Простите, мне неизвестна валюта {currency}. '
-                        f'Предлагаю посчитать в валютах {present_currencies}.')
+            currency_name_rate = today_currency[currency]
+            cash_remained = self.get_remained() * currency_name_rate[1]
+            cash_remained = round(abs(cash_remained), 2)
+            return (f'Денег нет, держись: твой долг - {cash_remained}'
+                    f' {currency_name_rate[0]}')
 
 
 class CaloriesCalculator(Calculator):
