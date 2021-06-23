@@ -51,18 +51,15 @@ class CashCalculator(Calculator):
             'usd': ['USD', CashCalculator.USD_RATE],
             'eur': ['Euro', CashCalculator.EURO_RATE]
         }
+        currency_name_rate = today_currency[currency]
+        cash_remained = remained * currency_name_rate[1]
+        cash_remained = round(abs(cash_remained), 2)
         if remained > 0:
-            currency_name_rate = today_currency[currency]
-            cash_remained = remained * currency_name_rate[1]
-            cash_remained = round(cash_remained, 2)
             return (f'На сегодня осталось {cash_remained} '
                     f'{currency_name_rate[0]}')
         elif remained == 0:
             return 'Денег нет, держись'
         else:
-            currency_name_rate = today_currency[currency]
-            cash_remained = remained * currency_name_rate[1]
-            cash_remained = round(abs(cash_remained), 2)
             return (f'Денег нет, держись: твой долг - {cash_remained}'
                     f' {currency_name_rate[0]}')
 
