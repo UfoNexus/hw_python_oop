@@ -37,18 +37,18 @@ class Record:
         if date is None:
             self.date = dt.date.today()
         else:
-            self.date = dt.datetime.strptime(date, '%d.%m.%Y')
+            self.date = dt.datetime.strptime(date, '%d.%m.%Y').date()
 
 
 class CashCalculator(Calculator):
     USD_RATE = 0.14
-    EUR_RATE = 0.11
+    EURO_RATE = 0.11
 
     def get_today_cash_remained(self, currency):
         today_currency = {
             'rub': ['руб', 1],
             'usd': ['USD', CashCalculator.USD_RATE],
-            'eur': ['Euro', CashCalculator.EUR_RATE]
+            'eur': ['Euro', CashCalculator.EURO_RATE]
         }
         present_currencies = ', '.join(today_currency.keys())
         currency_name_rate = today_currency[currency]
