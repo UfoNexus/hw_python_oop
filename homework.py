@@ -23,7 +23,7 @@ class Calculator:
 
     def get_week_stats(self):
         date_today = dt.date.today()
-        date_week_ago = date_today - dt.timedelta(days=8)
+        date_week_ago = date_today - dt.timedelta(days=7)
         amount_recorded = 0
         for i in self.records:
             if i.date >= date_week_ago and i.date <= date_today:
