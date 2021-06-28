@@ -1,3 +1,6 @@
+ServerRunTests: 
+
+```
 ----------------------- Проверка flake8 пройдена -----------------------
 
 ============================= test session starts ==============================
@@ -16,21 +19,19 @@ tests/test_homework.py::TestCalculator::test_get_calories_remained PASSED [ 35%]
 tests/test_homework.py::TestCalculator::test_get_today_cash_remained PASSED [ 40%]
 tests/test_homework.py::TestCaloriesCalculator::test_init PASSED         [ 45%]
 tests/test_homework.py::TestCaloriesCalculator::test_get_calories_remained PASSED [ 50%]
-tests/test_homework.py::TestCashCalculator::test_init PASSED             [ 55%]
+tests/test_homework.py::TestCashCalculator::test_init FAILED             [ 55%]
 tests/test_homework.py::TestCashCalculator::test_get_today_cash_remained[0-usd] PASSED [ 60%]
 tests/test_homework.py::TestCashCalculator::test_get_today_cash_remained[0-eur] PASSED [ 65%]
 tests/test_homework.py::TestCashCalculator::test_get_today_cash_remained[0-rub] PASSED [ 70%]
-tests/test_homework.py::TestCashCalculator::test_get_today_cash_remained[1-usd] FAILED [ 75%]
-tests/test_homework.py::TestCashCalculator::test_get_today_cash_remained[1-eur] FAILED [ 80%]
+tests/test_homework.py::TestCashCalculator::test_get_today_cash_remained[1-usd] PASSED [ 75%]
+tests/test_homework.py::TestCashCalculator::test_get_today_cash_remained[1-eur] PASSED [ 80%]
 tests/test_homework.py::TestCashCalculator::test_get_today_cash_remained[1-rub] PASSED [ 85%]
-tests/test_homework.py::TestCashCalculator::test_get_today_cash_remained[-1-usd] FAILED [ 90%]
-tests/test_homework.py::TestCashCalculator::test_get_today_cash_remained[-1-eur] FAILED [ 95%]
+tests/test_homework.py::TestCashCalculator::test_get_today_cash_remained[-1-usd] PASSED [ 90%]
+tests/test_homework.py::TestCashCalculator::test_get_today_cash_remained[-1-eur] PASSED [ 95%]
 tests/test_homework.py::TestCashCalculator::test_get_today_cash_remained[-1-rub] PASSED [100%]
 
 =================================== FAILURES ===================================
-/app/tests/test_homework.py:100: AssertionError: Необходимо считать сколько денег потрачено за последние 7 дней
-/app/tests/test_homework.py:203: AssertionError: Проверьте правильность работы метода `get_today_cash_remained()` у класса `CashCalculator`
-/app/tests/test_homework.py:203: AssertionError: Проверьте правильность работы метода `get_today_cash_remained()` у класса `CashCalculator`
-/app/tests/test_homework.py:203: AssertionError: Проверьте правильность работы метода `get_today_cash_remained()` у класса `CashCalculator`
-/app/tests/test_homework.py:203: AssertionError: Проверьте правильность работы метода `get_today_cash_remained()` у класса `CashCalculator`
-========================= 5 failed, 15 passed in 0.19s =========================
+/app/tests/test_homework.py:97: AssertionError: Проверьте правильность работы метода `get_week_stats()` у класса `Calculator`
+/app/tests/test_homework.py:173: AssertionError: Неверное значение свойства `EURO_RATE` у класса `CashCalculator`
+========================= 2 failed, 18 passed in 0.18s =========================
+```
