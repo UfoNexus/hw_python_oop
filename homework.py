@@ -5,16 +5,15 @@ class Calculator:
     def __init__(self, limit):
         self.limit = limit
         self.records = []
-        self.date_today = dt.date.today()
-        self.date_week_ago = self.date_today + dt.timedelta(days=-7)
 
     def add_record(self, new_record):
         self.records.append(new_record)
 
     def get_today_stats(self):
+        date_today = dt.date.today()
         amount_recorded = 0
         for i in self.records:
-            if i.date == self.date_today:
+            if i.date == date_today:
                 amount_recorded += i.amount
         return amount_recorded
 
@@ -23,9 +22,15 @@ class Calculator:
         return remaining
 
     def get_week_stats(self):
+        date_today = dt.date.today()
+        date_week_ago = date_today + dt.timedelta(days=-7)
         amount_recorded = 0
         for i in self.records:
+<<<<<<< HEAD
             if i.date >= self.date_week_ago and i.date < self.date_today:
+=======
+            if i.date >= date_week_ago and i.date < date_today:
+>>>>>>> work
                 amount_recorded += i.amount
         return amount_recorded
 
@@ -41,8 +46,8 @@ class Record:
 
 
 class CashCalculator(Calculator):
-    USD_RATE = 0.01379
-    EURO_RATE = 0.01153
+    USD_RATE = 72
+    EURO_RATE = 86
 
     def get_today_cash_remained(self, currency):
         remained = self.get_remained()
@@ -52,7 +57,7 @@ class CashCalculator(Calculator):
             'eur': ['Euro', CashCalculator.EURO_RATE]
         }
         currency_name_rate = today_currency[currency]
-        cash_remained = remained * currency_name_rate[1]
+        cash_remained = remained / currency_name_rate[1]
         cash_remained = round(abs(cash_remained), 2)
         if remained > 0:
             return (f'На сегодня осталось {cash_remained} '
