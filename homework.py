@@ -26,7 +26,7 @@ class Calculator:
         date_week_ago = date_today - dt.timedelta(days=7)
         amount_recorded = 0
         for i in self.records:
-            if i.date >= date_week_ago:
+            if i.date >= date_week_ago and i.date <= date_today:
                 amount_recorded += i.amount
         return amount_recorded
 
