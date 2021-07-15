@@ -15,7 +15,8 @@ class Calculator:
 
     def get_today_stats(self):
         date_today = dt.date.today()
-        today_records = [i.amount for i in self.records if i.date == date_today]
+        today_records = [i.amount for i in self.records
+                         if i.date == date_today]
         amount_recorded = sum(today_records)
         return amount_recorded
 
@@ -26,7 +27,8 @@ class Calculator:
     def get_week_stats(self):
         date_today = dt.date.today()
         date_week_ago = date_today - dt.timedelta(days=7)
-        week_records = [i.amount for i in self.records if date_week_ago < i.date <= date_today]
+        week_records = [i.amount for i in self.records
+                        if date_week_ago < i.date <= date_today]
         amount_recorded = sum(week_records)
         return amount_recorded
 
@@ -64,7 +66,7 @@ class CashCalculator(Calculator):
             return (f'На сегодня осталось {cash_remained} '
                     f'{currency_name}')
         return (f'Денег нет, держись: твой долг - {abs(cash_remained)}'
-                    f' {currency_name}')
+                f' {currency_name}')
 
 
 class CaloriesCalculator(Calculator):
