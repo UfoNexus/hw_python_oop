@@ -7,6 +7,7 @@ if __name__ == '__main__':
     print(test_cash_remained_positive.get_today_cash_remained('rub'))
     print(test_cash_remained_positive.get_today_cash_remained('usd'))
     print(test_cash_remained_positive.get_today_cash_remained('eur'))
+    print(test_cash_remained_positive.get_today_cash_remained('gbp'))
 
     test_cash_remained_zero = homework.CashCalculator(100)
     test_cash_remained_zero.add_record(homework.Record(60, 'test1'))

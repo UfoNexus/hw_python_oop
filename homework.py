@@ -57,6 +57,8 @@ class CashCalculator(Calculator):
             'usd': ('USD', self.USD_RATE),
             'eur': ('Euro', self.EURO_RATE)
         }
+        if currency not in today_currency:
+            return f'Простите, мне неизвестна валюта {currency}'
         currency_name, currency_rate = today_currency[currency]
         cash_remained = remained / currency_rate
         cash_remained = round(cash_remained, 2)
