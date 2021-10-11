@@ -66,7 +66,7 @@ class CashCalculator(Calculator):
             return (f'На сегодня осталось {cash_remained} '
                     f'{currency_name}')
         abs_cash_remained = abs(cash_remained)
-        return (f'Денег нет, держись: твой долг - {abs_cash_remained}'
+        return (f'Денег нет, держись: твой долг - {abs_cash_remained} '
                 + currency_name)
 
 
