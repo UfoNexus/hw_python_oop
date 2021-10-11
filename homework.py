@@ -1,11 +1,9 @@
 import datetime as dt
 
-
 DATE_FORMAT = '%d.%m.%Y'
 
 
 class Calculator:
-
     def __init__(self, limit):
         self.limit = limit
         self.records = []
@@ -52,6 +50,8 @@ class CashCalculator(Calculator):
 
     def get_today_cash_remained(self, currency):
         remained = self.get_remained()
+        if remained == 0:
+            return 'Денег нет, держись'
         today_currency = {
             'rub': ('руб', self.RUB_RATE),
             'usd': ('USD', self.USD_RATE),
@@ -62,13 +62,12 @@ class CashCalculator(Calculator):
         currency_name, currency_rate = today_currency[currency]
         cash_remained = remained / currency_rate
         cash_remained = round(cash_remained, 2)
-        if remained == 0:
-            return 'Денег нет, держись'
-        elif remained > 0:
+        if remained > 0:
             return (f'На сегодня осталось {cash_remained} '
                     f'{currency_name}')
-        return (f'Денег нет, держись: твой долг - {abs(cash_remained)}'
-                f' {currency_name}')
+        abs_cash_remained = abs(cash_remained)
+        return (f'Денег нет, держись: твой долг - {abs_cash_remained}'
+                + currency_name)
 
 
 class CaloriesCalculator(Calculator):
